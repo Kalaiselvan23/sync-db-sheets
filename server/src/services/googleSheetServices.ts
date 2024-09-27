@@ -1,8 +1,12 @@
 import { google } from "googleapis";
 import { GoogleAuth } from "google-auth-library";
-import path from "path"
+import path from "path";
+import config from "../configs";
+
+const keyFilePath = path.join(__dirname, '..', 'credentials.json');
+
 const auth = new GoogleAuth({
-  keyFile: "src/credentials.json"
+  keyFile:keyFilePath,
   scopes: "https://www.googleapis.com/auth/spreadsheets",
 });
 

@@ -13,10 +13,12 @@ const config = {
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
     redirectUri: process.env.OAUTH_REDIRECT_URI,
   },
-  sheets:{
-    sheeId:process.env.GOOGLE_SHEET_ID,
-  }
+  sheets: {
+    sheeId: process.env.GOOGLE_SHEET_ID,
+  },
+  dev: {
+    env: process.env.NODE_ENV || "dev",
+  },
 };
 
 export default config;
-
