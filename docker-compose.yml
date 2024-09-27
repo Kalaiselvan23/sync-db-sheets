@@ -10,10 +10,12 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:7.0.1
+    hostname: "kafka-internal.io"
     environment:
       KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_HOST_NAME: kafka-internal.io
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-internal.io:9092,PLAINTEXT_HOST://localhost:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -28,7 +30,7 @@ services:
   debezium:
     image: debezium/connect:1.9
     environment:
-      BOOTSTRAP_SERVERS: kafka:9092
+      BOOTSTRAP_SERVERS: kafka-internal.io:9092
       GROUP_ID: 1
       CONFIG_STORAGE_TOPIC: debezium_config
       OFFSET_STORAGE_TOPIC: debezium_offset
@@ -43,9 +45,9 @@ services:
   postgres:
     image: postgres:13
     environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
       - postgres-vol:/shared/lib/data
     ports:
@@ -61,7 +63,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      KAFKA_BROKER: kafka:9092
+      KAFKA_BROKER: kafka-internal.io:9092
+      DB_HOST: postgres
+      DB_PORT: 5432  
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_DBNAME: postgres
     depends_on:
       - kafka
     networks:
