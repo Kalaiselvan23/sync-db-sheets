@@ -14,7 +14,7 @@ const config = {
     redirectUri: process.env.OAUTH_REDIRECT_URI,
   },
   sheets: {
-    sheeId: process.env.GOOGLE_SHEET_ID,
+    sheetId: process.env.GOOGLE_SHEET_ID || "1KVVEj3YEnqYTUn5gg22ba_xhWE7RWxi_PVn_zFTQ850",
   },
   dev: {
     env: process.env.NODE_ENV || "dev",
