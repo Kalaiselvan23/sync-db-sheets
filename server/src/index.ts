@@ -13,5 +13,5 @@ app.get("/sync-db-sheets", syncFromDBToSheets);
 
 app.listen(8000, async() => {
   console.log("Listening on port 8000");
-   await consumeDatabaseChanges()
+  await consumeDatabaseChanges()
 });
