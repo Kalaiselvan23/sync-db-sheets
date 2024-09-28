@@ -22,6 +22,7 @@ services:
     ports:
       - "9092:9092"
       - "9093:9093"
+    restart: always
     depends_on:
       - zookeeper
     networks:
