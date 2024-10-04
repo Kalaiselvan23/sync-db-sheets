@@ -60,7 +60,7 @@ export const consumeDatabaseChanges = async () => {
         const formattedData = Object.values(updatedRow);
 
         if (formattedData && formattedData.length > 0) {
-          await updateGoogleSheet([formattedData], 'Sheet1!A1:D4');
+          await updateGoogleSheet([formattedData], 'Sheet1!A1:G10');
           console.log('Google Sheet updated with:', formattedData);
         }
       }
